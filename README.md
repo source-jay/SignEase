@@ -337,7 +337,7 @@ Accessible Communication
 
 ### Jay Nimase
 
-**B.Tech Computer Engineering Student**
+**B.Tech Software Engineering Student**
 MIT Academy of Engineering, Pune
 
 Interested in:
@@ -347,6 +347,9 @@ Interested in:
 * Machine Learning
 * Computer Vision
 * Full-Stack Development
+
+* GitHub: https://github.com/source-jay
+* LinkedIn: https://www.linkedin.com/in/jay-nimase/
 
 ---
 
