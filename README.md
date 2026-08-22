@@ -117,6 +117,8 @@ The application captures hand gestures through a camera, processes the visual in
 * Git
 * GitHub
 * VS Code
+* Cursor
+* Google Antigravity
 
 ---
 
