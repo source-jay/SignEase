@@ -1,108 +1,393 @@
-# SignEase
+# 🤟 SignEase
 
-Progressive Web App that converts American Sign Language (ASL) into text and speech in real time.
+> **Breaking communication barriers with AI-powered sign language recognition.**
 
-**Tagline:** Turning Sign Language into Voice, Instantly
+SignEase is an **AI-powered sign language recognition system** designed to bridge communication gaps between people who use sign language and those who may not understand it.
 
-## Tech stack
+The system uses **computer vision, image processing, and machine learning** to recognize hand gestures captured through a camera and convert them into **readable text and speech** in real time.
 
-- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS v4, shadcn/ui
-- **Backend:** Supabase (auth, database, storage, realtime)
-- **AI (later phases):** MediaPipe, TensorFlow.js, OpenAI, Web Speech API
+---
 
-## Getting started
+## 🌟 Overview
+
+Communication can be challenging for people with hearing and speech impairments when others around them do not understand sign language.
+
+**SignEase** aims to make communication more accessible by providing a system that can:
+
+**Hand Gesture → AI Recognition → Text → Speech**
+
+The application captures hand gestures through a camera, processes the visual input, identifies the corresponding sign, and converts the recognized gesture into text and optionally into speech using text-to-speech technology.
+
+---
+
+## ✨ Features
+
+* 🤟 **Real-Time Sign Recognition**
+
+  * Detect and recognize sign language gestures using a camera.
+
+* 📷 **Camera Integration**
+
+  * Capture hand gestures through a live camera feed.
+
+* 🧠 **AI-Powered Recognition**
+
+  * Uses machine learning and computer vision for gesture classification.
+
+* 📝 **Sign-to-Text Conversion**
+
+  * Converts recognized gestures into readable text.
+
+* 🔊 **Text-to-Speech**
+
+  * Converts recognized text into spoken audio.
+
+* 👤 **User Authentication**
+
+  * Login and signup functionality for users.
+
+* 🤖 **AI Assistant**
+
+  * Provides assistance and guidance within the application.
+
+* 🎨 **Smart UI/UX**
+
+  * Designed with accessibility and ease of use in mind.
+
+---
+
+## 🏗️ System Workflow
+
+```text
+              📷 Camera Input
+                    │
+                    ▼
+          ┌────────────────────┐
+          │  Image Processing  │
+          └────────────────────┘
+                    │
+                    ▼
+          ┌────────────────────┐
+          │ Hand Detection     │
+          │ & Landmark         │
+          │ Extraction         │
+          └────────────────────┘
+                    │
+                    ▼
+          ┌────────────────────┐
+          │ Machine Learning   │
+          │ Gesture Classifier │
+          └────────────────────┘
+                    │
+                    ▼
+             🤟 Recognized Sign
+                    │
+              ┌─────┴─────┐
+              ▼           ▼
+          📝 Text       🔊 Speech
+```
+
+---
+
+## 🛠️ Tech Stack
+
+### Artificial Intelligence & Machine Learning
+
+* Python
+* TensorFlow
+* MediaPipe
+* OpenCV
+* NumPy
+
+### Frontend
+
+* HTML
+* CSS
+* JavaScript
+
+### Backend
+
+* Node.js
+* Supabase
+* SQL
+
+### Other Technologies
+
+* Text-to-Speech API
+* Git
+* GitHub
+* VS Code
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 20+
-- npm 10+
-- [Supabase](https://supabase.com) project
+Make sure you have the following installed:
 
-### Install and run
+* Python 3.x
+* Node.js
+* npm
+* Git
+* A working webcam
+
+---
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/YOUR-USERNAME/SignEase.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd SignEase
+```
+
+---
+
+### 2. Install Python Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+If a virtual environment is used:
+
+```bash
+python -m venv venv
+```
+
+Activate it:
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**macOS / Linux**
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+### 3. Install Frontend Dependencies
+
+If the project uses a JavaScript frontend:
 
 ```bash
 npm install
-cp .env.example .env   # then add your Supabase URL and anon key
+```
+
+---
+
+### 4. Run the Application
+
+Start the backend:
+
+```bash
+python app.py
+```
+
+Then start the frontend if required:
+
+```bash
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173).
+Open the application in your browser.
 
-### Supabase setup
+---
 
-1. Create a project at [supabase.com/dashboard](https://supabase.com/dashboard).
-2. Copy **Project URL** and **anon public** key into `.env`.
-3. Run `supabase/migrations/001_initial_schema.sql` in the SQL Editor (or use Supabase CLI).
+## 🧠 How It Works
 
-### Authentication (Phase 2)
+SignEase follows a multi-stage recognition pipeline.
 
-In the Supabase dashboard for your project:
+### 1. Camera Capture
 
-1. **Authentication → URL configuration** — add redirect URLs:
-   - `http://localhost:5173/dashboard`
-   - `http://localhost:5173/profile-setup`
-   - `http://localhost:5173/reset-password`
-2. **Authentication → Providers → Google** — enable Google and add OAuth client credentials from [Google Cloud Console](https://console.cloud.google.com/).
-3. **Authentication → Email** — confirm whether email confirmation is required for sign-up (if enabled, users must verify email before signing in).
+The webcam continuously captures frames containing the user's hand gestures.
 
-## Auth flow
+### 2. Hand Detection
 
-| Route | Screen |
-|-------|--------|
-| `/` | Splash (3s) → onboarding, login, or dashboard |
-| `/onboarding` | 4-step intro + camera/mic permissions |
-| `/login` | Email/password + Google |
-| `/signup` | Registration + terms |
-| `/reset-password` | Reset link + new password (recovery) |
-| `/profile-setup` | Name + accessibility preferences (saved to `profiles`) |
-| `/dashboard` | Protected home (after auth + profile setup) |
+**MediaPipe** is used to detect the hand and identify important hand landmarks.
 
-## Project structure
+### 3. Image Processing
 
+**OpenCV** processes the captured frames and prepares the input for the recognition model.
+
+### 4. Gesture Classification
+
+The extracted hand landmarks/features are passed to a trained machine learning model.
+
+The model predicts the corresponding sign.
+
+### 5. Text Conversion
+
+The predicted sign is converted into readable text.
+
+### 6. Speech Generation
+
+The generated text can then be converted into speech using a text-to-speech system.
+
+---
+
+## 🎯 Use Cases
+
+SignEase can potentially be used in:
+
+* 🏫 Educational institutions
+* 🏥 Healthcare environments
+* 🏢 Workplaces
+* 🛍️ Customer service environments
+* 🏠 Everyday communication
+* 🌐 Accessibility-focused applications
+
+---
+
+## 📸 Screenshots
+
+### Login / Signup
+
+![SignEase Home Page](screenshots/signup.png)
+
+### Dashboard
+
+![SignEase Dashboard](screenshots/dashboard.png)
+
+### Sign Recognition
+
+![Translation](screenshots/translate.png)
+
+### Model Training
+
+![Translation](screenshots/modeltraining.png)
+
+### AI Assistant
+
+![AI Assistant](screenshots/assistant.png)
+
+### Profile
+
+![AI Assistant](screenshots/profile.png)
+
+---
+
+## 🔮 Future Improvements
+
+The project can be extended with:
+
+* [ ] Support for a larger sign language vocabulary
+* [ ] Continuous sentence recognition
+* [ ] Two-way communication
+* [ ] Multiple sign language support
+* [ ] Improved recognition accuracy
+* [ ] Mobile application
+* [ ] Cloud-based model deployment
+* [ ] Personalized gesture recognition
+* [ ] Offline recognition
+* [ ] Voice-to-sign-language conversion
+* [ ] Improved AI conversational assistant
+
+---
+
+## ⚠️ Current Limitations
+
+The recognition system may be affected by:
+
+* Lighting conditions
+* Camera quality
+* Hand positioning
+* Background complexity
+* Similar-looking gestures
+* Limited training data
+* Recognition of continuous sentences
+
+Improving the training dataset and model architecture can help address these limitations.
+
+---
+
+## 📊 Project Goals
+
+The primary goal of SignEase is to explore how **Artificial Intelligence and Computer Vision can be applied to accessibility technology**.
+
+The project focuses on combining:
+
+```text
+Computer Vision
+       +
+Machine Learning
+       +
+Hand Gesture Recognition
+       +
+Text-to-Speech
+       ↓
+Accessible Communication
 ```
-src/
-  components/   # UI and layout components
-  pages/        # Route-level screens
-  hooks/        # Custom React hooks
-  services/     # API clients (Supabase, etc.)
-  utils/        # Constants and helpers
-  types/        # TypeScript types
-  assets/       # Static assets
-  lib/          # shadcn utilities
+
+---
+
+## 👨‍💻 Developer
+
+### Jay Nimase
+
+**B.Tech Computer Engineering Student**
+MIT Academy of Engineering, Pune
+
+Interested in:
+
+* Software Engineering
+* Artificial Intelligence
+* Machine Learning
+* Computer Vision
+* Full-Stack Development
+
+---
+
+## ⭐ Contributing
+
+Contributions, suggestions, and improvements are welcome.
+
+If you would like to contribute:
+
+```bash
+git fork
 ```
 
-## Git branching strategy
+Create a new branch:
 
-| Branch | Purpose |
-|--------|---------|
-| `main` | Production-ready releases |
-| `develop` | Integration branch for completed phases |
-| `feature/*` | Individual features (e.g. `feature/phase-2-auth`) |
+```bash
+git checkout -b feature/new-feature
+```
 
-Workflow: branch from `develop` → PR into `develop` → merge to `main` at milestones.
+Commit your changes:
 
-## Scripts
+```bash
+git commit -m "Add new feature"
+```
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server |
-| `npm run build` | Production build |
-| `npm run preview` | Preview production build |
-| `npm run lint` | Run ESLint |
+Push your branch:
 
-## Development phases
+```bash
+git push origin feature/new-feature
+```
 
-1. **Project setup** — tooling, design system, Supabase client
-2. **Authentication** — splash, onboarding, login, signup, OAuth, protected routes
-3. **UI/UX foundation** (current) — app shell, navigation, theme, accessibility, PWA
-4. Camera & hand tracking
-5. Sign recognition AI
-6. Text-to-speech
-7. Translation pipeline
-8. History & favorites
-9. AI assistant
-10. Accessibility & performance
+Then open a Pull Request.
 
-## License
+---
 
-Private — all rights reserved.
+## 📄 License
+
+This project is intended for **educational and research purposes**.
+
+---
+
+## ⭐ Support
+
+If you find SignEase interesting, consider giving the repository a ⭐ on GitHub.
+
+**SignEase — Making communication more accessible, one gesture at a time. 🤟**
