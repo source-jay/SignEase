@@ -273,7 +273,7 @@ SignEase can potentially be used in:
 
 ### Profile
 
-![AI Assistant](screenshots/profile.png)
+![Profile](screenshots/rename.png)
 
 ---
 
